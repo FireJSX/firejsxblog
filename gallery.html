@@ -94,6 +94,9 @@ plusSlides(event.key === 'ArrowLeft' ? -1 : 1)">
     <span class="dot" onclick="currentSlide(4)"></span>
     <span class="dot" onclick="currentSlide(5)"></span>
 </div>
+
+<button onclick="downloadImage(slideIndex);">Download</button>
+
 <div id="social-media">
     <h2 id="sc-ueber"><b>Socials</b></h2>
     <a href="https://www.youtube.com/c/FireStroke_">
@@ -148,6 +151,24 @@ plusSlides(event.key === 'ArrowLeft' ? -1 : 1)">
 </script>
 <script>
 
+    let fileSize = [0, 0, 0, 0, 2];
+
+    function downloadImage(index) {
+        let img = document.getElementsByClassName("slideshow-container")[0].getElementsByClassName("mySlides")[index-1].getElementsByTagName("img")[0].src;
+        img = img.substring(0, img.length-3);
+        downloadFile(img + "zip");
+        for(let i = 0; i<fileSize[index]; i++)
+            downloadFile(img + "z" + ((""+(i+1)).length === 1 ? "0" : "") + (i+1));
+    }
+
+    function downloadFile(path) {
+        let a = document.createElement("a");
+        a.href = path;
+        a.download = path.split("/")[path.split("/").length - 1];
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+    }
 
     function lightswitch() {
         if (document.body.classList.contains("light")) {

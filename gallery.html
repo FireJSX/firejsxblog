@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="/style.css">
     <link rel="icon" href="Feuer.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
 
     </style>
@@ -94,9 +95,11 @@ plusSlides(event.key === 'ArrowLeft' ? -1 : 1)">
     <span class="dot" onclick="currentSlide(4)"></span>
     <span class="dot" onclick="currentSlide(5)"></span>
 </div>
-
-<button onclick="downloadImage(slideIndex);">Download</button>
-
+<br>
+<button class="btn" onclick="downloadPhotoshop(slideIndex);"><i class="fa fa-download"></i>Photoshop-Datei</button>
+<br>
+<br>
+<button class="btn" onclick="downloadImage(slideIndex);"><i class="fa fa-download"></i>Bilddatei</button>
 <div id="social-media">
     <h2 id="sc-ueber"><b>Socials</b></h2>
     <a href="https://www.youtube.com/c/FireStroke_">
@@ -153,7 +156,7 @@ plusSlides(event.key === 'ArrowLeft' ? -1 : 1)">
 
     let fileSize = [0, 0, 0, 0, 2];
 
-    function downloadImage(index) {
+    function downloadPhotoshop(index) {
         let img = document.getElementsByClassName("slideshow-container")[0].getElementsByClassName("mySlides")[index-1].getElementsByTagName("img")[0].src;
         img = img.substring(0, img.length-3);
         downloadFile(img + "zip");
@@ -161,10 +164,15 @@ plusSlides(event.key === 'ArrowLeft' ? -1 : 1)">
             downloadFile(img + "z" + ((""+(i+1)).length === 1 ? "0" : "") + (i+1));
     }
 
+    function downloadImage(index) {
+        let img = document.getElementsByClassName("slideshow-container")[0].getElementsByClassName("mySlides")[index-1].getElementsByTagName("img")[0].src;
+        downloadFile(img);
+    }
+
     function downloadFile(path) {
         let a = document.createElement("a");
         a.href = path;
-        a.download = path.split("/")[path.split("/").length - 1];
+        a.download = decodeURIComponent(path.split("/")[path.split("/").length - 1]);
         document.body.appendChild(a);
         a.click();
         a.remove();

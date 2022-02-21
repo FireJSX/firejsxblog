@@ -479,7 +479,7 @@ input:checked + .slider:before {
 }
 
 .btn {
-    background-color: DodgerBlue;
+    background-color: #4CAF50;
     border: none;
     color: white;
     padding: 12px 30px;
@@ -489,5 +489,5 @@ input:checked + .slider:before {
 
 /* Darker background on mouse-over */
 .btn:hover {
-    background-color: RoyalBlue;
+    background-color: green;
 }

@@ -207,7 +207,7 @@ a {
     background: gray;
     border-radius: 5%;
 }
-
+/*
 ul{
     list-style-type: none;
     margin: 0;
@@ -236,7 +236,7 @@ li a:hover{
 .active{
     background-color: #4CAF50;
 }
-
+*/
 .mySlides {
     display: none
 }
@@ -366,7 +366,7 @@ body.light {
     text-align: center;
 }
 
-ul {
+#navbar {
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -377,11 +377,11 @@ ul {
     z-index: 100;
 }
 
-li {
+#navbar li {
     float: left;
 }
 
-li a {
+#navbar li a {
     display: block;
     color: white;
     text-align: center;
@@ -389,7 +389,7 @@ li a {
     text-decoration: none;
 }
 
-li a:hover {
+#navbar li a:hover {
     background: #111;
 }
 

@@ -246,13 +246,12 @@ li a:hover{
 }
 
 .flex-item {
-    width: 40%;
+    width: 50%;
 }
 
 .flex-item img {
     width: 100%;
     border-radius: 2rem;
-    width: 100%;
 }
 
 @media only screen and (max-width: 800px) {

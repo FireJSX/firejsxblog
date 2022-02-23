@@ -237,6 +237,30 @@ li a:hover{
     background-color: #4CAF50;
 }
 */
+
+.flex-container {
+    display:flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.flex-item {
+    width: 40%;
+}
+
+.flex-item img {
+    width: 100%;
+    border-radius: 2rem;
+    width: 100%;
+}
+
+@media only screen and (max-width: 800px) {
+    .flex-item {
+        width: 90%;
+    }
+}
+
 .mySlides {
     display: none
 }

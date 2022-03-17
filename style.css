@@ -15,6 +15,18 @@ body.light {
     text-align: center;
 }
 
+body.light #navbar.active {
+    background-color: skyblue;
+}
+
+body.light #navbar.btn {
+    background-color: skyblue;
+}
+
+body.light #navbar.btn:hover{
+    background-color: deepskyblue;
+}
+
 body.light #social-media {
     background-color: #131415;
     color: white;
@@ -207,36 +219,6 @@ a {
     background: gray;
     border-radius: 5%;
 }
-/*
-ul{
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #333;
-    position: sticky;
-    top: 0;
-}
-
-li{
-    float: left;
-}
-
-li a{
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-}
-li a:hover{
-    background: #111;
-}
-
-.active{
-    background-color: #4CAF50;
-}
-*/
 
 .flex-container {
     display:flex;

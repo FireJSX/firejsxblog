@@ -15,15 +15,15 @@ body.light {
     text-align: center;
 }
 
-body.light #navbar.active {
+body.light .active {
     background-color: skyblue;
 }
 
-body.light #navbar.btn {
+body.light .btn {
     background-color: skyblue;
 }
 
-body.light #navbar.btn:hover{
+body.light .btn:hover{
     background-color: deepskyblue;
 }
 

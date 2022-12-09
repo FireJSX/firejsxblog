@@ -28,6 +28,36 @@
     <meta name="theme-color" content="#ffffff">
     <style>
 
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {background-color: #f1f1f1}
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown:hover {
+            background-color: #3e8e41;
+        }
     </style>
 </head>
 <body onkeydown="if(event.key === 'ArrowLeft' || event.key === 'ArrowRight')
@@ -35,10 +65,18 @@ plusSlides(event.key === 'ArrowLeft' ? -1 : 1)">
 
 <ul id="navbar">
     <li>
-        <a href="index.html">Home</a>
+        <a href="/index.html">Home</a>
     </li>
     <li>
-        <a class="active" href="gallery.html">Gallery</a>
+        <div class="dropdown">
+
+        <a class="active" href="index.html">Gallery</a>
+            <div class="dropdown-content">
+                <a href="banner.html">Banner</a>
+                <a href="thumbnails.html">Thumbnails</a>
+                <a href="skinrender.html">Skinrender</a>
+            </div>
+        </div>
     </li>
     <li>
 
@@ -59,25 +97,25 @@ plusSlides(event.key === 'ArrowLeft' ? -1 : 1)">
 
     <div class="mySlides fade">
         <div class="numbertext">1 / 4</div>
-        <img src="Banner%202021.jpg" style="width:100%">
+        <img src="/Banner%202021.jpg" style="width:100%">
         <div class="text"><b>Banner FireJSX</b></div>
     </div>
 
     <div class="mySlides fade">
         <div class="numbertext">2 / 4</div>
-        <img src="banner%20pagplayes.jpg" style="width:100%">
+        <img src="/banner%20pagplayes.jpg" style="width:100%">
         <div class="text"><b>Banner PAGPLAYES</b></div>
     </div>
 
     <div class="mySlides fade">
         <div class="numbertext">3 / 4</div>
-        <img src="tune.jpg" style="width:100%">
+        <img src="/tune.jpg" style="width:100%">
         <div class="text"><b>Banner Tune</b></div>
     </div>
 
     <div class="mySlides fade">
         <div class="numbertext">4 / 4</div>
-        <img src="Banner%20livi.png" style="width:100%">
+        <img src="/Banner%20livi.png" style="width:100%">
         <div class="text"><b>Banner Livi</b></div>
     </div>
 

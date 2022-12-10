@@ -27,10 +27,38 @@
     <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
     <style>
+        .navbar {
+            overflow: hidden;
+            background-color: #333;
+        }
+
+        .navbar a {
+            float: left;
+            font-size: 16px;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
 
         .dropdown {
-            position: relative;
-            display: inline-block;
+            float: left;
+            overflow: hidden;
+        }
+
+        .dropdown .dropbtn {
+            font-size: 16px;
+            border: none;
+            outline: none;
+            color: white;
+            padding: 14px 16px;
+            background-color: inherit;
+            font-family: inherit;
+            margin: 0;
+        }
+
+        .navbar a:hover, .dropdown:hover .dropbtn {
+            background-color: black;
         }
 
         .dropdown-content {
@@ -43,55 +71,53 @@
         }
 
         .dropdown-content a {
+            float: none;
             color: black;
             padding: 12px 16px;
             text-decoration: none;
             display: block;
+            text-align: left;
         }
 
-        .dropdown-content a:hover {background-color: #f1f1f1}
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
 
         .dropdown:hover .dropdown-content {
             display: block;
         }
 
-        .dropdown:hover {
-            background-color: #3e8e41;
+        body.light #navbut{
+            background: skyblue;
+        }
+
+        #navbut{
+            background: #4CAF50;
         }
     </style>
 </head>
 <body onkeydown="if(event.key === 'ArrowLeft' || event.key === 'ArrowRight')
 plusSlides(event.key === 'ArrowLeft' ? -1 : 1)">
-
-<ul id="navbar">
-    <li>
-        <a href="/index.html">Home</a>
-    </li>
-    <li>
-        <div class="dropdown">
-
-        <a class="active" href="index.html">Gallery</a>
-            <div class="dropdown-content">
-                <a href="banner.html">Banner</a>
-                <a href="thumbnails.html">Thumbnails</a>
-                <a href="skinrender.html">Skinrender</a>
-            </div>
+<div class="navbar">
+    <a href="/index.html">Home</a>
+    <div class="dropdown">
+        <button class="dropbtn" id="navbut" >Gallery
+            <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+            <a href="banner.html">Banner</a>
+            <a href="thumbnails.html">Thumbnails</a>
+            <a href="skinrender.html">Skinrender</a>
         </div>
-    </li>
-    <li>
-
-    </li>
-
-    <li style="float:right;margin-right:5px">
-        <div id="lightswitch">
-            <label class="switch">
-                <input type="checkbox" onchange="lightswitch()">
-                <span class="slider round">
+    </div>
+    <div id="lightswitch" style="float:right;margin-right:5px">
+        <label class="switch">
+            <input type="checkbox" onchange="lightswitch()">
+            <span class="slider round">
     </span>
-            </label>
-        </div>
-    </li>
-</ul>
+        </label>
+    </div>
+</div>
 <h1>Banner</h1>
 <div class="slideshow-container" id="container1">
 

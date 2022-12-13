@@ -39,6 +39,14 @@ function downloadPhotoshop(index) {
         downloadFile(img + "z" + ((""+(i+1)).length === 1 ? "0" : "") + (i+1));
 }
 
+function downloadC4D(index) {
+    let img = document.getElementsByClassName("slideshow-container")[0].getElementsByClassName("mySlides")[index-1].getElementsByTagName("img")[0].src;
+    img = img.substring(0, img.length-3);
+    downloadFile(img + "zip");
+    for(let i = 0; i<fileSize[index]; i++)
+        downloadFile(img + "z" + ((""+(i+1)).length === 1 ? "0" : "") + (i+1));
+}
+
 function downloadImage(index) {
     let img = document.getElementsByClassName("slideshow-container")[0].getElementsByClassName("mySlides")[index-1].getElementsByTagName("img")[0].src;
     downloadFile(img);

@@ -1,180 +1,153 @@
 <!DOCTYPE html>
-<html>
+<html lang="de">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta charset="UTF-8">
-    <meta name="author" content="Jonas Vogel">
-    <title>FireJSX - Blog</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="/assets/css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="apple-touch-icon" sizes="57x57" href="/assets/favicons/apple-icon-57x57.png">
-    <link rel="apple-touch-icon" sizes="60x60" href="/assets/favicons/apple-icon-60x60.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="/assets/favicons/apple-icon-72x72.png">
-    <script src="/assets/js/jss.js" defer></script>
-    <link rel="apple-touch-icon" sizes="76x76" href="/assets/favicons/apple-icon-76x76.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="/assets/favicons/apple-icon-114x114.png">
-    <link rel="apple-touch-icon" sizes="120x120" href="/assets/favicons/apple-icon-120x120.png">
-    <link rel="apple-touch-icon" sizes="144x144" href="/assets/favicons/apple-icon-144x144.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="/assets/favicons/apple-icon-152x152.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-icon-180x180.png">
-    <link rel="icon" type="image/png" sizes="192x192"  href="/assets/favicons/android-icon-192x192.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="96x96" href="/assets/favicons/favicon-96x96.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
-    <link rel="manifest" href="/manifest.json">
-    <meta name="msapplication-TileColor" content="#ffffff">
-    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
-    <meta name="theme-color" content="#ffffff">
-    <style>
-        .navbar {
-            overflow: hidden;
-            background-color: #333;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FireJSX - Blog</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" sizes="57x57" href="/assets/favicons/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="/assets/favicons/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/assets/favicons/apple-icon-72x72.png">
+  <script src="/assets/js/jss.js" defer></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+    .navbar {
+      overflow: hidden;
+      background-color: #333;
+    }
 
-        .navbar a {
-            float: left;
-            font-size: 16px;
-            color: white;
-            text-align: center;
-            padding: 14px 16px;
-            text-decoration: none;
-        }
+    .navbar a {
+      float: left;
+      font-size: 16px;
+      color: white;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+    }
 
-        .dropdown {
-            float: left;
-            overflow: hidden;
-        }
+    .dropdown {
+      float: left;
+      overflow: hidden;
+    }
 
-        .dropdown .dropbtn {
-            font-size: 16px;
-            border: none;
-            outline: none;
-            color: white;
-            padding: 14px 16px;
-            background-color: inherit;
-            font-family: inherit;
-            margin: 0;
-        }
+    .dropdown .dropbtn {
+      font-size: 16px;
+      border: none;
+      outline: none;
+      color: white;
+      padding: 14px 16px;
+      background-color: inherit;
+      font-family: inherit;
+      margin: 0;
+    }
 
-        .navbar a:hover, .dropdown:hover .dropbtn {
-            background-color: black;
-        }
+    .navbar a:hover, .dropdown:hover .dropbtn {
+      background-color: black;
+    }
 
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: #f9f9f9;
-            min-width: 160px;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            z-index: 1;
-        }
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #f9f9f9;
+      min-width: 160px;
+      box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+      z-index: 1;
+    }
 
-        .dropdown-content a {
-            float: none;
-            color: black;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-            text-align: left;
-        }
+    .dropdown-content a {
+      float: none;
+      color: black;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+      text-align: left;
+    }
 
-        .dropdown-content a:hover {
-            background-color: #ddd;
-        }
+    .dropdown-content a:hover {
+      background-color: #ddd;
+    }
 
-        .dropdown:hover .dropdown-content {
-            display: block;
-        }
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
 
-        body.light #navbut{
-            background: skyblue;
-        }
+    #game-container {
+      text-align: center;
+    }
 
-        #navbut{
-            background: #4CAF50;
-        }
-    </style>
+    canvas {
+      background-color: #ffffff;
+      border: 1px solid #000;
+      display: block;
+      margin: 0 auto;
+    }
+
+    #startButton {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    #startButton:hover {
+      background-color: #45a049;
+    }
+  </style>
 </head>
-<body onkeydown="if(event.key === 'ArrowLeft' || event.key === 'ArrowRight')
-plusSlides(event.key === 'ArrowLeft' ? -1 : 1)">
+<body onkeydown="if(event.key === 'ArrowLeft' || event.key === 'ArrowRight') plusSlides(event.key === 'ArrowLeft' ? -1 : 1)">
 <div class="navbar">
-    <a href="/index.html">Home</a>
-    <div class="dropdown">
-        <button class="dropbtn" id="navbut" >Gallery
-            <i class="fa fa-caret-down"></i>
-        </button>
-        <div class="dropdown-content">
-            <a href="banner.html">Banner</a>
-            <a href="thumbnails.html">Thumbnails</a>
-            <a href="skinrender.html">Skinrender</a>
-        </div>
+  <a href="/index.html">Home</a>
+  <div class="dropdown">
+    <button class="dropbtn" id="navbut">Gallery
+      <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content">
+      <a href="/gallery/banner.html">Banner</a>
+      <a href="/gallery/thumbnails.html">Thumbnails</a>
+      <a href="/gallery/skinrender.html">Skinrender</a>
     </div>
-    <div id="lightswitch" style="float:right;margin-right:5px">
-        <label class="switch">
-            <input type="checkbox" onchange="lightswitch()">
-            <span class="slider round">
-    </span>
-        </label>
-    </div>
+  </div>
+  <div id="lightswitch" style="float:right;margin-right:5px">
+    <label class="switch">
+      <input type="checkbox" onchange="lightswitch()">
+      <span class="slider round"></span>
+    </label>
+  </div>
 </div>
-<h1>Banner</h1>
-<div class="slideshow-container" id="container1">
 
-    <div class="mySlides fade">
-        <div class="numbertext">1 / 4</div>
-        <img src="/assets/img/gallery/banner/Banner%202021.jpg" style="width:100%">
-        <div class="text"><b>Banner FireJSX</b></div>
-    </div>
-
-    <div class="mySlides fade">
-        <div class="numbertext">2 / 4</div>
-        <img src="/assets/img/gallery/banner/banner%20pagplayes.jpg" style="width:100%">
-        <div class="text"><b>Banner PAGPLAYES</b></div>
-    </div>
-
-    <div class="mySlides fade">
-        <div class="numbertext">3 / 4</div>
-        <img src="/assets/img/gallery/banner/tune.jpg" style="width:100%">
-        <div class="text"><b>Banner Tune</b></div>
-    </div>
-
-    <div class="mySlides fade">
-        <div class="numbertext">4 / 4</div>
-        <img src="/assets/img/gallery/banner/Banner%20livi.png" style="width:100%">
-        <div class="text"><b>Banner Livi</b></div>
-    </div>
-
-    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-    <a class="next" onclick="plusSlides(1)">&#10095;</a>
-
+<!-- Hier füge ich den Bereich für dein Spiel ein -->
+<div id="game-container">
+  <canvas id="gameCanvas" width="800" height="600"></canvas>
+  <button id="startButton">Spiel Starten</button>
 </div>
+
+<br>
+<br>
+<br>
 <br>
 
-<div style="text-align:center">
-    <span class="dot" onclick="currentSlide(1)"></span>
-    <span class="dot" onclick="currentSlide(2)"></span>
-    <span class="dot" onclick="currentSlide(3)"></span>
-    <span class="dot" onclick="currentSlide(4)"></span>
-</div>
-<br>
-<button class="btn" onclick="downloadPhotoshop(slideIndex);"><i class="fa fa-download"></i>Photoshop-Datei</button>
-<br>
-<br>
-<br>
-<br>
-<br>
 <div id="social-media">
-    <h2 id="sc-ueber"><b>Socials</b></h2>
-    <a href="https://www.youtube.com/c/FireStroke_">
-        <button id="yt-button" class="button"><i class="fa-brands fa-youtube"></i></button>
-    </a>
-    <a href="https://www.twitch.tv/firejsx">
-        <button id="ttv-button" class="button"><i class="fa-brands fa-twitch"></i></button>
-    </a>
-    <a href="https://www.instagram.com/jonas_7302">
-        <button id="insta-button" class="button"><i class="fa-brands fa-instagram"></i></button>
-    </a>
+  <h2 id="sc-ueber"><b>Socials</b></h2>
+  <a href="https://www.youtube.com/c/FireStroke_">
+    <button id="yt-button" class="button"><i class="fa-brands fa-youtube"></i></button>
+  </a>
+  <a href="https://www.twitch.tv/firejsx">
+    <button id="ttv-button" class="button"><i class="fa-brands fa-twitch"></i></button>
+  </a>
+  <a href="https://www.instagram.com/jonas_7302">
+    <button id="insta-button" class="button"><i class="fa-brands fa-instagram"></i></button>
+  </a>
 </div>
 <br>
 <br>
@@ -183,5 +156,23 @@ plusSlides(event.key === 'ArrowLeft' ? -1 : 1)">
 <br>
 <br>
 <br>
+
+<script type="module">
+  // Importiere die gameLoop-Funktion aus game.js
+  import { gameLoop } from './js/game.js';
+
+  // Setup für das Spiel
+  const startButton = document.getElementById('startButton');
+  const canvas = document.getElementById('gameCanvas');
+
+  // Spielstart durch Button-Klick
+  startButton.addEventListener('click', () => {
+    // Start-Button ausblenden
+    startButton.style.display = 'none';
+
+    // Spiel starten
+    gameLoop(0);  // Der gameLoop wird nach dem Start-Klick aufgerufen
+  });
+</script>
 </body>
 </html>

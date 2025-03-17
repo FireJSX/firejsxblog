@@ -1,9 +1,10 @@
 // Spieler-Klasse
 import { SpriteSheet } from "./gfx.js";
 import { soundManager } from "./sfx.js";
+import { getRefreshRate } from "./refreshRate.js";
 
 class Player {
-    constructor(x, y, size, speed, gravity, ui) {
+    constructor(x, y, size, speed, jumpPower, gravity, ui) {
         this.ui = ui;
         this.x = x || 0; // Fallback auf 0, falls x nicht gesetzt ist
         this.y = y || 0; // Fallback auf 0, falls y nicht gesetzt ist
@@ -12,7 +13,7 @@ class Player {
         this.gravity = gravity;
         this.yChange = 0;
         this.xChange = 0;
-        this.jumpPower = -0.6;
+        this.jumpPower = jumpPower;
         this.onGround = false;
         this.state = 'idle'; // Anfangszustand 'idle'
 

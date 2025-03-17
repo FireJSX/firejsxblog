@@ -4,6 +4,7 @@ import { ObstacleManager } from './logic.js';
 import { Floor } from './gui.js';  // Importiere die Floor-Klasse
 import { UI } from './gui.js';
 import { soundManager } from './sfx.js';  // Instanz des SoundManagers importieren
+import { getRefreshRate } from "./refreshRate.js";
 
 // Setup für das HTML5 Canvas
 const canvas = document.getElementById('gameCanvas');
@@ -20,48 +21,60 @@ let gravity = 0.1;
 let speed = 18;
 let obstacleSpeed = 8;
 let lastSpeedIncrease = -10;
+let jumpPower = -0.5;
 
 // Erstelle die Spielfunktionen und Objekte
 const ui = new UI(canvas.width, canvas.height);
-const player = new Player(50, canvas.height - 100 - playerSize, playerSize, speed, gravity, ui);
+const player = new Player(50, canvas.height - 100 - playerSize, playerSize, speed, jumpPower, gravity, ui);
 const obstacles = new ObstacleManager(canvas.width, playerSize / 2, obstacleSpeed, ui);
 const background = new Image();
 background.src = '/dinorunner/assets/moon_background.png';
 
 let floor = new Floor(canvas, '/dinorunner/assets/floor.png');
-let frameTimes = [];
-let refreshRate = 60; // Standard-Wert als Fallback
+//let frameTimes = [];
+//let refreshRate = 60; // Standard-Wert als Fallback
 
-function updateRefreshRate() {
-    const now = performance.now();
-    if (window.lastFrameTime) {
-        frameTimes.push(now - window.lastFrameTime);
-        if (frameTimes.length > 30) frameTimes.shift(); // Behalte nur die letzten 30 Frames
-    }
-    window.lastFrameTime = now;
+//function updateRefreshRate() {
+  //  const now = performance.now();
+  //  if (window.lastFrameTime) {
+  //      frameTimes.push(now - window.lastFrameTime);
+  //      if (frameTimes.length > 30) frameTimes.shift(); // Behalte nur die letzten 30 Frames
+  //  }
+ //   window.lastFrameTime = now;
 
-    const avgFrameTime = frameTimes.reduce((a, b) => a + b, 0) / frameTimes.length;
-    refreshRate = Math.round(1000 / avgFrameTime);
-}
+ //   const avgFrameTime = frameTimes.reduce((a, b) => a + b, 0) / frameTimes.length;
+ //   refreshRate = Math.round(1000 / avgFrameTime);
+//}
 
-let targetFrameTime = 2400 / refreshRate;
+//let targetFrameTime = 2400 / refreshRate;
 
 
 // FPS Setup
 
+let refresh = 10;
+
 const TARGET_FPS = 60;
-const TARGET_FRAME_TIME = targetFrameTime / TARGET_FPS; // 1000 ms / 60 FPS = ca. 16.67 ms pro Frame
+const TARGET_FRAME_TIME = refresh / TARGET_FPS; // 1000 ms / 60 FPS = ca. 16.67 ms pro Frame
 let lastTime = 0; // Zeitstempel für DeltaTime
 let accumulatedTime = 0; // Zeit, die sich über mehrere Frames ansammelt
 
 // Spiel-Schleife
-// Spiel-Schleife
 export function gameLoop(timestamp) {
+    if (getRefreshRate()===240){
+        refresh = 40;
+        jumpPower = -0.4;
+        gravity = 0.1;
+    }
+    else if (getRefreshRate()===60){
+        refresh = 10;
+        jumpPower = -0.6;
+        gravity= 0.2;
+    }
     // Berechne die DeltaTime (Zeitdifferenz zwischen den Frames)
     const deltaTime = timestamp - lastTime;
     lastTime = timestamp; // Speichere den aktuellen Zeitstempel als "letzten" Zeitpunkt
-
-    updateRefreshRate()
+    console.log("40 -0.4 0.1 ist 240 hz: "+refresh +jumpPower+gravity)
+    //updateRefreshRate()
 
     accumulatedTime += deltaTime;
 

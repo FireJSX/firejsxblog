@@ -1,9 +1,10 @@
-// Importiere die benötigten Module (Player, ObstacleManager, UI, etc.)
+// Importiere die benötigten Module
 import { Player } from './logic.js';
 import { ObstacleManager } from './logic.js';
-import { Floor } from './gui.js';  // Importiere die Floor-Klasse
+import { Floor } from './gui.js';
 import { UI } from './gui.js';
-import { soundManager } from './sfx.js';  // Instanz des SoundManagers importieren
+import { soundManager } from './sfx.js';
+import { getRefreshRate } from './refreshRate.js'; // Importiere die RefreshRate-Funktion
 
 // Setup für das HTML5 Canvas
 const canvas = document.getElementById('gameCanvas');
@@ -16,8 +17,8 @@ let score = 0;
 let highscore = 0;
 let active = false;
 let playerSize = 20;
-let gravity = 0.1;
-let speed = 18;
+let gravity = 0.08;
+let speed = 16;
 let obstacleSpeed = 8;
 let lastSpeedIncrease = -10;
 
@@ -29,60 +30,38 @@ const background = new Image();
 background.src = '/dinorunner/assets/moon_background.png';
 
 let floor = new Floor(canvas, '/dinorunner/assets/floor.png');
-let frameTimes = [];
-let refreshRate = 60; // Standard-Wert als Fallback
 
-function updateRefreshRate() {
-    const now = performance.now();
-    if (window.lastFrameTime) {
-        frameTimes.push(now - window.lastFrameTime);
-        if (frameTimes.length > 30) frameTimes.shift(); // Behalte nur die letzten 30 Frames
-    }
-    window.lastFrameTime = now;
-
-    const avgFrameTime = frameTimes.reduce((a, b) => a + b, 0) / frameTimes.length;
-    refreshRate = Math.round(1000 / avgFrameTime);
-}
-
-let targetFrameTime = 2400 / refreshRate;
-
+// **Verwende die externe RefreshRate-Berechnung**
+let targetFrameTime = 2400 / getRefreshRate();
 
 // FPS Setup
-
 const TARGET_FPS = 240;
-const TARGET_FRAME_TIME = targetFrameTime / TARGET_FPS; // 1000 ms / 60 FPS = ca. 16.67 ms pro Frame
-let lastTime = 0; // Zeitstempel für DeltaTime
-let accumulatedTime = 0; // Zeit, die sich über mehrere Frames ansammelt
+const TARGET_FRAME_TIME = targetFrameTime / TARGET_FPS;
+let lastTime = 0;
+let accumulatedTime = 0;
 
-// Spiel-Schleife
 // Spiel-Schleife
 export function gameLoop(timestamp) {
-    // Berechne die DeltaTime (Zeitdifferenz zwischen den Frames)
     const deltaTime = timestamp - lastTime;
-    lastTime = timestamp; // Speichere den aktuellen Zeitstempel als "letzten" Zeitpunkt
+    lastTime = timestamp;
 
-    updateRefreshRate()
+    // **Aktualisiere die Refreshrate dynamisch**
+    targetFrameTime = 2400 / getRefreshRate();
 
     accumulatedTime += deltaTime;
 
-    // Wenn mehr als 16.67 ms vergangen sind (also ein Frame bei 60 FPS), dann rendere und aktualisiere das Spiel
     while (accumulatedTime >= TARGET_FRAME_TIME) {
-        // Canvas leeren
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-        // Hintergrund rendern
         ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
 
         floor.update(ctx);
 
-        // Geschwindigkeit alle 10 Punkte erhöhen
         if (score >= lastSpeedIncrease + 10) {
-            obstacleSpeed += 1;  // Erhöhe die Hindernisgeschwindigkeit
-            lastSpeedIncrease = score;  // Merkt sich, wann zuletzt erhöht wurde
-            console.log("Speed erhöht! "+ "Aktueller Speed:" + obstacleSpeed)
+            obstacleSpeed += 2;
+            lastSpeedIncrease = score;
+            console.log("Speed erhöht! " + "Aktueller Speed: " + obstacleSpeed);
         }
 
-        // Score und Highscore anzeigen
         displayScoreAndHighscore();
 
         if (active) {
@@ -90,38 +69,33 @@ export function gameLoop(timestamp) {
             obstacles.render(ctx);
         }
 
-        // Wenn das Spiel nicht aktiv ist, zeige das Startmenü
         if (!active) {
             ui.showStartScreen(ctx);
         } else {
-            // Spielerbewegung und Animation aktualisieren
             const keys = getPressedKeys();
-            player.move(keys, canvas.height - 100, canvas.width - playerSize * 2, deltaTime / 1000);  // DeltaTime an die move-Methode übergeben (in Sekunden)
-            player.update(deltaTime / 1000);  // DeltaTime an die update-Methode übergeben (in Sekunden)
-            player.render(ctx);  // Spieler rendern
+            player.move(keys, canvas.height - 100, canvas.width - playerSize * 2, deltaTime / 1000);
+            player.update(deltaTime / 1000);
+            player.render(ctx);
         }
 
-        // Kollisionsprüfung nach Spielerbewegung
         if (active) {
-            score += obstacles.moveObstacles(deltaTime / 1000, obstacleSpeed);  // DeltaTime in Sekunden übergeben
-
-            // Kollisionserkennung
+            score += obstacles.moveObstacles(deltaTime / 1000, obstacleSpeed);
             if (obstacles.checkCollision(player.getRect())) {
                 soundManager.playDeathSound();
                 if (score > highscore) {
                     highscore = score;
                     saveHighscore(highscore);
                 }
-                active = false; // Beende das Spiel, wenn eine Kollision erkannt wird
+                active = false;
             }
         }
 
-        accumulatedTime -= TARGET_FRAME_TIME; // Ziehe die verbrauchte Zeit ab
+        accumulatedTime -= TARGET_FRAME_TIME;
     }
 
-    // Spiel-Schleife fortsetzen
     requestAnimationFrame(gameLoop);
 }
+
 
 
 // Funktion um Tasteneingaben zu holen

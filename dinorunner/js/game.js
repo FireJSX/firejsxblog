@@ -60,39 +60,42 @@ let accumulatedTime = 0; // Zeit, die sich über mehrere Frames ansammelt
 
 // Spiel-Schleife
 export function gameLoop(timestamp) {
-    if (getRefreshRate()===240){
+    if (getRefreshRate() === 240) {
         refresh = 40;
         jumpPower = -0.4;
         gravity = 0.1;
-    }
-    else if (getRefreshRate()===60){
+        obstacleSpeed=35;
+        speed=18*4;
+    } else if (getRefreshRate() === 60) {
         refresh = 10;
         jumpPower = -0.6;
-        gravity= 0.2;
+        gravity = 0.2;
     }
+
     // Berechne die DeltaTime (Zeitdifferenz zwischen den Frames)
     const deltaTime = timestamp - lastTime;
-    lastTime = timestamp; // Speichere den aktuellen Zeitstempel als "letzten" Zeitpunkt
-    console.log("40 -0.4 0.1 ist 240 hz: "+refresh +jumpPower+gravity)
-    //updateRefreshRate()
+    lastTime = timestamp;
+    console.log("Refreshrate: " +getRefreshRate());
 
     accumulatedTime += deltaTime;
 
-    // Wenn mehr als 16.67 ms vergangen sind (also ein Frame bei 60 FPS), dann rendere und aktualisiere das Spiel
+    // ⚠️ FIX: accumulatedTime begrenzen, um Überlastung zu verhindern (max. 5 Frames)
+    accumulatedTime = Math.min(accumulatedTime, 5 * TARGET_FRAME_TIME);
+
+    // Frame-Update-Schleife
     while (accumulatedTime >= TARGET_FRAME_TIME) {
         // Canvas leeren
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
         // Hintergrund rendern
         ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
-
         floor.update(ctx);
 
         // Geschwindigkeit alle 10 Punkte erhöhen
         if (score >= lastSpeedIncrease + 10) {
-            obstacleSpeed += 1;  // Erhöhe die Hindernisgeschwindigkeit
-            lastSpeedIncrease = score;  // Merkt sich, wann zuletzt erhöht wurde
-            console.log("Speed erhöht! "+ "Aktueller Speed:" + obstacleSpeed)
+            obstacleSpeed += 1;
+            lastSpeedIncrease = score;
+            console.log("Speed erhöht! Aktueller Speed: " + obstacleSpeed);
         }
 
         // Score und Highscore anzeigen
@@ -109,14 +112,14 @@ export function gameLoop(timestamp) {
         } else {
             // Spielerbewegung und Animation aktualisieren
             const keys = getPressedKeys();
-            player.move(keys, canvas.height - 100, canvas.width - playerSize * 2, deltaTime / 1000);  // DeltaTime an die move-Methode übergeben (in Sekunden)
-            player.update(deltaTime / 1000);  // DeltaTime an die update-Methode übergeben (in Sekunden)
-            player.render(ctx);  // Spieler rendern
+            player.move(keys, canvas.height - 100, canvas.width - playerSize * 2, deltaTime / 1000);
+            player.update(deltaTime / 1000);
+            player.render(ctx);
         }
 
         // Kollisionsprüfung nach Spielerbewegung
         if (active) {
-            score += obstacles.moveObstacles(deltaTime / 1000, obstacleSpeed);  // DeltaTime in Sekunden übergeben
+            score += obstacles.moveObstacles(deltaTime / 1000, obstacleSpeed);
 
             // Kollisionserkennung
             if (obstacles.checkCollision(player.getRect())) {
@@ -129,12 +132,13 @@ export function gameLoop(timestamp) {
             }
         }
 
-        accumulatedTime -= TARGET_FRAME_TIME; // Ziehe die verbrauchte Zeit ab
+        accumulatedTime -= TARGET_FRAME_TIME;
     }
 
     // Spiel-Schleife fortsetzen
     requestAnimationFrame(gameLoop);
 }
+
 
 
 // Funktion um Tasteneingaben zu holen

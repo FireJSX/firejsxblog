@@ -17,9 +17,9 @@ class Player {
         this.state = 'idle'; // Anfangszustand 'idle'
 
         // Animationen
-        this.walkSpriteSheet = new SpriteSheet('/dinorunner/assets/dino_walk.png', 32, 32);
-        this.jumpSpriteSheet = new SpriteSheet('/dinorunner/assets/dino_jump.png', 32, 32);
-        this.idleSpriteSheet = new SpriteSheet('/dinorunner/assets/dino_idle.png', 32, 32);
+        this.walkSpriteSheet = new SpriteSheet('https://firejsx.de/dinorunner/assets/dino_walk.png', 32, 32);
+        this.jumpSpriteSheet = new SpriteSheet('https://firejsx.de/dinorunner/assets/dino_jump.png', 32, 32);
+        this.idleSpriteSheet = new SpriteSheet('https://firejsx.de/dinorunner/assets/dino_idle.png', 32, 32);
 
         // Arrays zum Speichern der Frames
         this.walkFrames = [];

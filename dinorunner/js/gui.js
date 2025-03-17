@@ -25,7 +25,7 @@ class UI {
      * @returns {string} Der absolute Pfad zur Datei.
      */
     getRessourcesPath(filename) {
-        return `../assets/${filename}`;
+        return `/dinorunner/assets/${filename}`;
     }
 
     /**

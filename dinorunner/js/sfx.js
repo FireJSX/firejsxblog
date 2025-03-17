@@ -6,7 +6,7 @@ class SoundManager {
         this.volume = 0.5;
 
         // Verzeichnis der Sounddateien
-        this.soundDir = "../sound"; // Falls der Pfad anders ist, anpassen
+        this.soundDir = "/dinorunner/sound"; // Falls der Pfad anders ist, anpassen
 
         // Sounddateien
         this.backgroundMusicFile = `${this.soundDir}/somebody_told_you.WAV`;

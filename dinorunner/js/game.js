@@ -49,7 +49,7 @@ let targetFrameTime = 2400 / refreshRate;
 
 // FPS Setup
 
-const TARGET_FPS = 60;
+const TARGET_FPS = 240;
 const TARGET_FRAME_TIME = targetFrameTime / TARGET_FPS; // 1000 ms / 60 FPS = ca. 16.67 ms pro Frame
 let lastTime = 0; // Zeitstempel für DeltaTime
 let accumulatedTime = 0; // Zeit, die sich über mehrere Frames ansammelt

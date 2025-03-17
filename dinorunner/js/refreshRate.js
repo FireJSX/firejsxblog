@@ -1,6 +1,6 @@
 let frames = 0;
 let startTime = performance.now();
-let refreshRate = 240; // Standard-Wert als Fallback
+let refreshRate = 60; // Standard-Wert als Fallback
 
 function measureRefreshRate() {
     frames++;

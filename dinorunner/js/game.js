@@ -44,6 +44,7 @@ let accumulatedTime = 0;
 export function gameLoop(timestamp) {
     const deltaTime = timestamp - lastTime;
     lastTime = timestamp;
+    console.log("Aktuelle Refreshrate:", getRefreshRate());
 
     // **Aktualisiere die Refreshrate dynamisch**
     targetFrameTime = 2400 / getRefreshRate();

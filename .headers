@@ -1,0 +1,14 @@
+/assets/*
+  Content-Type: image/png
+
+/sound/*
+  Content-Type: audio/mpeg
+
+/sound/*.wav
+  Content-Type: audio/wav
+
+/dinorunner/sound/*
+  Content-Type: audio/mpeg
+
+/dinorunner/sound/*.wav
+  Content-Type: audio/wav

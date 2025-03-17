@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <meta name="author" content="Jonas Vogel">
+    <title>FireJSX - Blog</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="apple-touch-icon" sizes="57x57" href="/assets/favicons/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/assets/favicons/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/assets/favicons/apple-icon-72x72.png">
+    <script src="/assets/js/jss.js" defer></script>
+    <link rel="apple-touch-icon" sizes="76x76" href="/assets/favicons/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/assets/favicons/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/assets/favicons/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/assets/favicons/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/assets/favicons/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="/assets/favicons/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/assets/favicons/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+    <style>
+
+    </style>
+</head>
+<body onkeydown="if(event.key === 'ArrowLeft' || event.key === 'ArrowRight')
+plusSlides(event.key === 'ArrowLeft' ? -1 : 1)">
+
+<ul id="navbar">
+    <li>
+        <a href="../index.html">Home</a>
+    </li>
+    <li>
+        <a class="active" href="gallery.html">Gallery</a>
+    </li>
+    <li>
+
+    </li>
+
+    <li style="float:right;margin-right:5px">
+        <div id="lightswitch">
+            <label class="switch">
+                <input type="checkbox" onchange="lightswitch()">
+                <span class="slider round">
+    </span>
+            </label>
+        </div>
+    </li>
+</ul>
+<h1>Banner</h1>
+<div class="slideshow-container" id="container1">
+
+    <div class="mySlides fade">
+        <div class="numbertext">1 / 4</div>
+        <img src="Banner%202021.jpg" style="width:100%">
+        <div class="text"><b>Banner FireJSX</b></div>
+    </div>
+
+    <div class="mySlides fade">
+        <div class="numbertext">2 / 4</div>
+        <img src="banner%20pagplayes.jpg" style="width:100%">
+        <div class="text"><b>Banner PAGPLAYES</b></div>
+    </div>
+
+    <div class="mySlides fade">
+        <div class="numbertext">3 / 4</div>
+        <img src="tune.jpg" style="width:100%">
+        <div class="text"><b>Banner Tune</b></div>
+    </div>
+
+    <div class="mySlides fade">
+        <div class="numbertext">4 / 4</div>
+        <img src="Banner%20livi.png" style="width:100%">
+        <div class="text"><b>Banner Livi</b></div>
+    </div>
+
+    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+    <a class="next" onclick="plusSlides(1)">&#10095;</a>
+
+</div>
+<br>
+
+<div style="text-align:center">
+    <span class="dot" onclick="currentSlide(1)"></span>
+    <span class="dot" onclick="currentSlide(2)"></span>
+    <span class="dot" onclick="currentSlide(3)"></span>
+    <span class="dot" onclick="currentSlide(4)"></span>
+</div>
+<br>
+<button class="btn" onclick="downloadPhotoshop(slideIndex);"><i class="fa fa-download"></i>Photoshop-Datei</button>
+<br>
+<br>
+<button class="btn" onclick="downloadImage(slideIndex);"><i class="fa fa-download"></i>Bilddatei</button>
+<br>
+<br>
+<br>
+<div id="social-media">
+    <h2 id="sc-ueber"><b>Socials</b></h2>
+    <a href="https://www.youtube.com/c/FireStroke_">
+        <button id="yt-button" class="button"><i class="fa-brands fa-youtube"></i></button>
+    </a>
+    <a href="https://www.twitch.tv/firejsx">
+        <button id="ttv-button" class="button"><i class="fa-brands fa-twitch"></i></button>
+    </a>
+    <a href="https://www.instagram.com/jonas_7302">
+        <button id="insta-button" class="button"><i class="fa-brands fa-instagram"></i></button>
+    </a>
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</body>
+</html>

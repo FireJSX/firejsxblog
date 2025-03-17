@@ -2,23 +2,31 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Jonas Vogel">
+
   <title>FireJSX - Blog</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <link rel="stylesheet" href="/assets/css/style.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="/assets/js/jss.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="apple-touch-icon" sizes="57x57" href="/assets/favicons/apple-icon-57x57.png">
   <link rel="apple-touch-icon" sizes="60x60" href="/assets/favicons/apple-icon-60x60.png">
   <link rel="apple-touch-icon" sizes="72x72" href="/assets/favicons/apple-icon-72x72.png">
-  <script src="/assets/js/jss.js" defer></script>
+  <link rel="apple-touch-icon" sizes="76x76" href="/assets/favicons/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/assets/favicons/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/assets/favicons/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/assets/favicons/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/assets/favicons/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/favicons/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/favicons/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f0f0f0;
-      text-align: center;
-      margin: 0;
-      padding: 0;
-    }
     .navbar {
       overflow: hidden;
       background-color: #333;
@@ -58,7 +66,7 @@
       position: absolute;
       background-color: #f9f9f9;
       min-width: 160px;
-      box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
       z-index: 1;
     }
 
@@ -79,8 +87,12 @@
       display: block;
     }
 
-    #game-container {
-      text-align: center;
+    body.light #navbut{
+      background: skyblue;
+    }
+
+    #navbut{
+      background: #4CAF50;
     }
 
     canvas {
@@ -89,7 +101,6 @@
       display: block;
       margin: 0 auto;
     }
-
     #startButton {
       margin-top: 20px;
       padding: 10px 20px;
@@ -99,17 +110,16 @@
       cursor: pointer;
       font-size: 16px;
     }
-
     #startButton:hover {
       background-color: #45a049;
     }
   </style>
+
 </head>
-<body onkeydown="if(event.key === 'ArrowLeft' || event.key === 'ArrowRight') plusSlides(event.key === 'ArrowLeft' ? -1 : 1)">
 <div class="navbar">
-  <a href="/index.html">Home</a>
+  <a href="index.html" id="navbut">Home</a>
   <div class="dropdown">
-    <button class="dropbtn" id="navbut">Gallery
+    <button class="dropbtn"  >Gallery
       <i class="fa fa-caret-down"></i>
     </button>
     <div class="dropdown-content">
@@ -118,44 +128,28 @@
       <a href="/gallery/skinrender.html">Skinrender</a>
     </div>
   </div>
+  <a href="/dinorunner/index.html">DinoRunner</a>
   <div id="lightswitch" style="float:right;margin-right:5px">
     <label class="switch">
       <input type="checkbox" onchange="lightswitch()">
-      <span class="slider round"></span>
+      <span class="slider round">
+    </span>
     </label>
   </div>
 </div>
+<div><h1 align="center">DINORUNNER!</h1></div>
+<br>
+<br>
+<br>
+<canvas id="gameCanvas" width="800" height="600"></canvas>
+<button id="startButton">Spiel Starten</button>
 
-<!-- Hier füge ich den Bereich für dein Spiel ein -->
-<div id="game-container">
-  <canvas id="gameCanvas" width="800" height="600"></canvas>
-  <button id="startButton">Spiel Starten</button>
-</div>
-
-<br>
-<br>
-<br>
-<br>
-
-<div id="social-media">
-  <h2 id="sc-ueber"><b>Socials</b></h2>
-  <a href="https://www.youtube.com/c/FireStroke_">
-    <button id="yt-button" class="button"><i class="fa-brands fa-youtube"></i></button>
-  </a>
-  <a href="https://www.twitch.tv/firejsx">
-    <button id="ttv-button" class="button"><i class="fa-brands fa-twitch"></i></button>
-  </a>
-  <a href="https://www.instagram.com/jonas_7302">
-    <button id="insta-button" class="button"><i class="fa-brands fa-instagram"></i></button>
-  </a>
-</div>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
+<!-- Einbinden der externen JavaScript-Dateien -->
+<script type="module" src="/dinorunner/js/sfx.js"></script>  <!-- SFX (Sound Manager) -->
+<script type="module" src="/dinorunner/js/logic.js"></script> <!-- Spiellogik -->
+<script type="module" src="/dinorunner/js/gui.js"></script>   <!-- GUI (Benutzeroberfläche) -->
+<script type="module" src="/dinorunner/js/gfx.js"></script>   <!-- GFX (Grafik) -->
+<script type="module" src="/dinorunner/js/game.js"></script>  <!-- Hauptspiel-Logik -->
 
 <script type="module">
   // Importiere die gameLoop-Funktion aus game.js
@@ -163,7 +157,6 @@
 
   // Setup für das Spiel
   const startButton = document.getElementById('startButton');
-  const canvas = document.getElementById('gameCanvas');
 
   // Spielstart durch Button-Klick
   startButton.addEventListener('click', () => {
@@ -174,5 +167,38 @@
     gameLoop(0);  // Der gameLoop wird nach dem Start-Klick aufgerufen
   });
 </script>
+
+
+<br>
+<br>
+<br>
+<div id="social-media">
+  <h2 id="sc-ueber"><b>Socials</b></h2>
+  <a href="https://www.youtube.com/c/FireStroke_" target="_blank">
+    <button id="yt-button" class="button"><i class="fa-brands fa-youtube"></i></button>
+  </a>
+  <a href="https://www.twitch.tv/firejsx" target="_blank">
+    <button id="ttv-button" class="button"><i class="fa-brands fa-twitch"></i></button>
+  </a>
+  <a href="https://www.instagram.com/jonas_7302" target="_blank">
+    <button id="insta-button" class="button"><i class="fa-brands fa-instagram"></i></button>
+  </a>
+</div>
+<br>
+<br>
+<br>
+<div>
+  Anmerkung: Handy und/oder Laptop nicht unbeaufsichtigt lassen, wenn ein wildes Fabi in der Nähe ist.
+</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+</div>
+
+
+
 </body>
 </html>

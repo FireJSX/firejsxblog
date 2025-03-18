@@ -17,11 +17,11 @@ let score = 0;
 let highscore = 0;
 let active = false;
 let playerSize = 20;
-let gravity = 1.4;
+let gravity = 0.3;
 let speed = 72;
 let obstacleSpeed = 80;
 let lastSpeedIncrease = -10;
-let jumpPower = -2.5;
+let jumpPower = -0.6;
 
 // Erstelle die Spielfunktionen und Objekte
 const ui = new UI(canvas.width, canvas.height);
@@ -69,10 +69,6 @@ export function gameLoop(timestamp) {
     }
     else if (getRefreshRate() === 144) {
         refresh = 24;
-        player.jumpPower = -0.36;
-        player.gravity = 0.18;
-        obstacles.obstacleSpeed= 48;
-        player.speed= 43.2;
     }
 
     // Berechne die DeltaTime (Zeitdifferenz zwischen den Frames)
@@ -96,12 +92,7 @@ export function gameLoop(timestamp) {
         floor.update(ctx);
 
         if (score >= lastSpeedIncrease + 10) {
-            if(getRefreshRate()===240){
-                obstacleSpeed += 50;
-            }
-            else{
-                obstacleSpeed += 40;
-            }
+            obstacleSpeed += 50;
             lastSpeedIncrease = score;
             console.log("obstacleSpeed erhöht:" +obstacleSpeed)
         }

@@ -51,7 +51,7 @@ let floor = new Floor(canvas, 'https://firejsx.de/dinorunner/assets/floor.png');
 
 // FPS Setup
 
-let refresh = 10;
+let refresh = 40;
 
 const TARGET_FPS = 60;
 const TARGET_FRAME_TIME = refresh / TARGET_FPS; // 1000 ms / 60 FPS = ca. 16.67 ms pro Frame
@@ -77,9 +77,6 @@ export function gameLoop(timestamp) {
     // Berechne die DeltaTime (Zeitdifferenz zwischen den Frames)
     const deltaTime = timestamp - lastTime;
     lastTime = timestamp;
-
-    // Ausgabe der aktuellen RefreshRate (Debugging)
-    console.log("Refreshrate: " + getRefreshRate());
 
     accumulatedTime += deltaTime;
 

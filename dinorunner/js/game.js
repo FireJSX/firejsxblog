@@ -70,9 +70,9 @@ export function gameLoop(timestamp) {
     else if (getRefreshRate() === 144) {
         refresh = 24;
     }
-    else if (getRefreshRate() === 60) {
-        refresh = 10;
-    }
+    //else if (getRefreshRate() === 60) {
+      //  refresh = 10;
+    //}
 
     // Berechne die DeltaTime (Zeitdifferenz zwischen den Frames)
     const deltaTime = timestamp - lastTime;

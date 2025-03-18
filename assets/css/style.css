@@ -16,15 +16,15 @@ body.light {
 }
 
 body.light .active {
-    background-color: skyblue;
+    background-color: darkred;
 }
 
 body.light .btn {
-    background-color: skyblue;
+    background-color: darkred;
 }
 
 body.light .btn:hover{
-    background-color: deepskyblue;
+    background-color: red;
 }
 
 body.light #social-media {
@@ -38,15 +38,15 @@ body.light #darkmode-button {
 }
 
 body.light #profilepicture-header{
-    border: 3px dotted skyblue;
+    border: 3px dotted darkred;
 }
 
 body.light #navbut{
-    background: skyblue;
+    background: darkred;
 }
 
 #navbut{
-    background: #4CAF50;
+    background: darkblue;
 }
 
 #social-media {
@@ -168,7 +168,7 @@ input:checked + .slider:before {
     display: block;
     margin: auto;
     width: 20rem;
-    border: 3px dotted lawngreen;
+    border: 3px dotted darkblue;
     padding: 0.5rem;
 }
 
@@ -440,12 +440,9 @@ body.light {
 }
 
 body.light #navbut{
-    background: skyblue;
+    background: darkred;
 }
 
-#navbut{
-    background: #4CAF50;
-}
 
 #navbar {
     list-style-type: none;
@@ -475,7 +472,7 @@ body.light #navbut{
 }
 
 .active {
-    background-color: #4CAF50;
+    background-color: darkblue;
 }
 
 
@@ -560,7 +557,7 @@ input:checked + .slider:before {
 }
 
 .btn {
-    background-color: #4CAF50;
+    background-color: darkblue;
     border: none;
     color: white;
     padding: 12px 30px;
@@ -570,5 +567,5 @@ input:checked + .slider:before {
 
 /* Darker background on mouse-over */
 .btn:hover {
-    background-color: green;
+    background-color: blue;
 }

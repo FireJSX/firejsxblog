@@ -28,22 +28,22 @@ const ui = new UI(canvas.width, canvas.height);
 const player = new Player(50, canvas.height - 100 - playerSize, playerSize, speed, jumpPower, gravity, ui);
 const obstacles = new ObstacleManager(canvas.width, playerSize / 2, obstacleSpeed, ui);
 const background = new Image();
-background.src = '/dinorunner/assets/moon_background.png';
+background.src = '/assets/moon_background.png';
 
-let floor = new Floor(canvas, '/dinorunner/assets/floor.png');
+let floor = new Floor(canvas, '/assets/floor.png');
 //let frameTimes = [];
 //let refreshRate = 60; // Standard-Wert als Fallback
 
 //function updateRefreshRate() {
-  //  const now = performance.now();
-  //  if (window.lastFrameTime) {
-  //      frameTimes.push(now - window.lastFrameTime);
-  //      if (frameTimes.length > 30) frameTimes.shift(); // Behalte nur die letzten 30 Frames
-  //  }
- //   window.lastFrameTime = now;
+//  const now = performance.now();
+//  if (window.lastFrameTime) {
+//      frameTimes.push(now - window.lastFrameTime);
+//      if (frameTimes.length > 30) frameTimes.shift(); // Behalte nur die letzten 30 Frames
+//  }
+//   window.lastFrameTime = now;
 
- //   const avgFrameTime = frameTimes.reduce((a, b) => a + b, 0) / frameTimes.length;
- //   refreshRate = Math.round(1000 / avgFrameTime);
+//   const avgFrameTime = frameTimes.reduce((a, b) => a + b, 0) / frameTimes.length;
+//   refreshRate = Math.round(1000 / avgFrameTime);
 //}
 
 //let targetFrameTime = 2400 / refreshRate;
@@ -62,43 +62,55 @@ let accumulatedTime = 0; // Zeit, die sich über mehrere Frames ansammelt
 export function gameLoop(timestamp) {
     if (getRefreshRate() === 240) {
         refresh = 40;
-        jumpPower = -0.4;
-        gravity = 0.1;
-        obstacleSpeed=35;
-        speed=18*4;
+        player.jumpPower = -0.6;
+        player.gravity = 0.3;
+        obstacles.obstaclespeed=80;
+        player.speed=speed*4;
     } else if (getRefreshRate() === 60) {
         refresh = 10;
-        jumpPower = -0.6;
-        gravity = 0.2;
+        player.jumpPower = -0.15;
+        player.gravity = 0.75;
+        obstacles.obstacleSpeed=20;
+    }
+    else if (getRefreshRate() === 144) {
+        refresh = 24;
+        player.jumpPower = -0.36;
+        player.gravity = 0.18;
+        obstacles.obstacleSpeed= 48;
+        player.speed= 43.2;
     }
 
     // Berechne die DeltaTime (Zeitdifferenz zwischen den Frames)
     const deltaTime = timestamp - lastTime;
     lastTime = timestamp;
-    console.log("Refreshrate: " +getRefreshRate());
+
+    // Ausgabe der aktuellen RefreshRate (Debugging)
+    console.log("Refreshrate: " + getRefreshRate());
 
     accumulatedTime += deltaTime;
 
-    // ⚠️ FIX: accumulatedTime begrenzen, um Überlastung zu verhindern (max. 5 Frames)
+    // Begrenze die maximale Zeit, die wir ansammeln (max. 5 Frames)
     accumulatedTime = Math.min(accumulatedTime, 5 * TARGET_FRAME_TIME);
 
     // Frame-Update-Schleife
     while (accumulatedTime >= TARGET_FRAME_TIME) {
-        // Canvas leeren
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.clearRect(0, 0, canvas.width, canvas.height); // Canvas leeren
 
-        // Hintergrund rendern
-        ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
+        ctx.drawImage(background, 0, 0, canvas.width, canvas.height); // Hintergrund rendern
+
         floor.update(ctx);
 
-        // Geschwindigkeit alle 10 Punkte erhöhen
         if (score >= lastSpeedIncrease + 10) {
-            obstacleSpeed += 1;
+            if(getRefreshRate()===240){
+                obstacleSpeed += 50;
+            }
+            else{
+                obstacleSpeed += 12.5;
+            }
             lastSpeedIncrease = score;
-            console.log("Speed erhöht! Aktueller Speed: " + obstacleSpeed);
+            console.log("obstacleSpeed erhöht:" +obstacleSpeed)
         }
 
-        // Score und Highscore anzeigen
         displayScoreAndHighscore();
 
         if (active) {
@@ -106,15 +118,13 @@ export function gameLoop(timestamp) {
             obstacles.render(ctx);
         }
 
-        // Wenn das Spiel nicht aktiv ist, zeige das Startmenü
         if (!active) {
             ui.showStartScreen(ctx);
         } else {
-            // Spielerbewegung und Animation aktualisieren
             const keys = getPressedKeys();
-            player.move(keys, canvas.height - 100, canvas.width - playerSize * 2, deltaTime / 1000);
-            player.update(deltaTime / 1000);
-            player.render(ctx);
+            player.move(keys, canvas.height - 100, canvas.width - playerSize * 2, deltaTime / 1000); // Spieler bewegen
+            player.update(deltaTime / 1000); // Animation und Physik aktualisieren
+            player.render(ctx); // Spieler rendern
         }
 
         // Kollisionsprüfung nach Spielerbewegung
@@ -128,16 +138,16 @@ export function gameLoop(timestamp) {
                     highscore = score;
                     saveHighscore(highscore);
                 }
-                active = false; // Beende das Spiel, wenn eine Kollision erkannt wird
+                active = false; // Spiel beenden bei Kollision
             }
         }
 
         accumulatedTime -= TARGET_FRAME_TIME;
     }
 
-    // Spiel-Schleife fortsetzen
-    requestAnimationFrame(gameLoop);
+    requestAnimationFrame(gameLoop); // Weiter zum nächsten Frame
 }
+
 
 
 
@@ -211,8 +221,17 @@ function startNewGame() {
     player.reset(50, canvas.height - playerSize);   // Setze die Spielfigur zurück
     obstacles.reset();  // Setze die Hindernisse zurück
     score = 0;  // Setze den Punktestand zurück
-    obstacleSpeed = 8;  // Setze die Hindernisgeschwindigkeit zurück
-    lastSpeedIncrease = -10;  // Setze die letzte Geschwindigkeitserhöhung zurück
+    if (getRefreshRate()===240){
+        obstacleSpeed = 100;
+    }
+    else if(getRefreshRate()===60){
+        obstacleSpeed = 20;
+    }
+    else if(getRefreshRate()===144){
+        obstacleSpeed = 48;
+    }
+
+    lastSpeedIncrease = Math.floor(score / 10) * 10; // Setze die letzte Geschwindigkeitserhöhung zurück
     active = true;
     soundManager.playBackgroundMusic();  // Hintergrundmusik starten
     keys = {};

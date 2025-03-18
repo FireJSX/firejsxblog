@@ -34,6 +34,8 @@ class Player {
         this.idleFrameIndex = 0;
         this.facingRight = true;
 
+        this.fps=12;
+
         // Lade die Sprite-Sheets
         this.loadAssets();
     }
@@ -132,34 +134,45 @@ class Player {
 
     // update() angepasst, um DeltaTime zu berücksichtigen
     update(deltaTime) {
-        this.animationTimer += this.animationSpeed * deltaTime;
+        // Definiere die Frames pro Sekunde je nach Zustand
+        let framesPerSecond = 2; // Standard FPS für Walk und Idle
+        if (this.state === 'jump') {
+            framesPerSecond = 6; // FPS für Jump
+        }
 
-        if (this.animationTimer >= 1) {
-            this.animationTimer = 0;
+        // Berechne die Zeit, die für jedes Frame benötigt wird (in Sekunden)
+        const frameDuration = 1 / framesPerSecond;
+
+        // Zähle den animationTimer mit der Zeit basierend auf deltaTime hoch
+        this.animationTimer += deltaTime;
+
+        // Wenn der Timer den Wert der Frame-Dauer überschreitet, wechsle den Frame
+        if (this.animationTimer >= frameDuration) {
+            this.animationTimer -= frameDuration; // Reset des Timers
 
             let newFrame = null;
 
-            // Wechsle die Frames basierend auf dem Zustand
+            // Bestimme den Frame basierend auf dem Zustand
             if (this.state === 'walk' && this.walkFrames.length > 0) {
-                newFrame = this.walkFrames[this.walkFrameIndex]; // Hole Frame aus walkFrames
-                this.walkFrameIndex = (this.walkFrameIndex + 1) % this.walkFrames.length; // Update den Index
+                newFrame = this.walkFrames[this.walkFrameIndex]; // Holen des Frames aus walkFrames
+                this.walkFrameIndex = (this.walkFrameIndex + 1) % this.walkFrames.length; // Update des Indexes
             } else if (this.state === 'jump' && this.jumpFrames.length > 0) {
-                newFrame = this.jumpFrames[this.jumpFrameIndex]; // Hole Frame aus jumpFrames
+                newFrame = this.jumpFrames[this.jumpFrameIndex]; // Holen des Frames aus jumpFrames
                 this.jumpFrameIndex = (this.jumpFrameIndex + 1) % this.jumpFrames.length;
             } else if (this.state === 'idle' && this.idleFrames.length > 0) {
-                newFrame = this.idleFrames[this.idleFrameIndex]; // Hole Frame aus idleFrames
+                newFrame = this.idleFrames[this.idleFrameIndex]; // Holen des Frames aus idleFrames
                 this.idleFrameIndex = (this.idleFrameIndex + 1) % this.idleFrames.length;
             }
 
             if (!newFrame) {
-                newFrame = this.idleFrames[0]; // Falls kein Frame vorhanden, zeige das erste Bild von idle
+                newFrame = this.idleFrames[0]; // Falls kein Frame vorhanden, das erste Bild von idle verwenden
             }
 
             // Bestimmen der Blickrichtung
             if (this.xChange > 0) this.facingRight = true;
             else if (this.xChange < 0) this.facingRight = false;
 
-            // Wenn der Spieler nach links schaut, dann das Bild spiegeln
+            // Wenn der Dino nach links schaut, dann das Bild spiegeln
             if (!this.facingRight) {
                 newFrame = this.flipImage(newFrame);
             }
@@ -209,8 +222,8 @@ class ObstacleManager {
     }
 
     // moveObstacles() angepasst, um DeltaTime zu verwenden
-    moveObstacles(deltaTime, obstacleSpeed) {
-        this.obstaclespeed = obstacleSpeed;
+    // moveObstacles() angepasst, um DeltaTime zu verwenden und intern den `obstaclespeed` zu verwenden
+    moveObstacles(deltaTime) {
         let points = 0;
         for (let i = 0; i < this.obstacles.length; i++) {
             this.obstacles[i] -= this.obstaclespeed * deltaTime;  // Geschwindigkeit multipliziert mit DeltaTime

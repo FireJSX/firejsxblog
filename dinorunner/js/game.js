@@ -31,23 +31,6 @@ const background = new Image();
 background.src = 'https://firejsx.de/dinorunner/assets/moon_background.png';
 
 let floor = new Floor(canvas, 'https://firejsx.de/dinorunner/assets/floor.png');
-//let frameTimes = [];
-//let refreshRate = 60; // Standard-Wert als Fallback
-
-//function updateRefreshRate() {
-//  const now = performance.now();
-//  if (window.lastFrameTime) {
-//      frameTimes.push(now - window.lastFrameTime);
-//      if (frameTimes.length > 30) frameTimes.shift(); // Behalte nur die letzten 30 Frames
-//  }
-//   window.lastFrameTime = now;
-
-//   const avgFrameTime = frameTimes.reduce((a, b) => a + b, 0) / frameTimes.length;
-//   refreshRate = Math.round(1000 / avgFrameTime);
-//}
-
-//let targetFrameTime = 2400 / refreshRate;
-
 
 // FPS Setup
 
@@ -70,9 +53,13 @@ export function gameLoop(timestamp) {
     else if (getRefreshRate() === 144) {
         refresh = 24;
     }
-    //else if (getRefreshRate() === 60) {
-      //  refresh = 10;
-    //}
+    else if (getRefreshRate() === 60) {
+        refresh = 10;
+        player.jumpPower = -2.5;
+        player.gravity = 1.4;
+        obstacles.obstaclespeed = 80;
+        player.speed = 72;
+    }
 
     // Berechne die DeltaTime (Zeitdifferenz zwischen den Frames)
     const deltaTime = timestamp - lastTime;

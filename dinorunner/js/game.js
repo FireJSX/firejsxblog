@@ -28,9 +28,9 @@ const ui = new UI(canvas.width, canvas.height);
 const player = new Player(50, canvas.height - 100 - playerSize, playerSize, speed, jumpPower, gravity, ui);
 const obstacles = new ObstacleManager(canvas.width, playerSize / 2, obstacleSpeed, ui);
 const background = new Image();
-background.src = '/assets/moon_background.png';
+background.src = 'https://firejsx.de/dinorunner/assets/moon_background.png';
 
-let floor = new Floor(canvas, '/assets/floor.png');
+let floor = new Floor(canvas, 'https://firejsx.de/dinorunner/assets/floor.png');
 //let frameTimes = [];
 //let refreshRate = 60; // Standard-Wert als Fallback
 

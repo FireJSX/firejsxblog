@@ -17,11 +17,11 @@ let score = 0;
 let highscore = 0;
 let active = false;
 let playerSize = 20;
-let gravity = 0.1;
-let speed = 18;
-let obstacleSpeed = 8;
+let gravity = 1.4;
+let speed = 72;
+let obstacleSpeed = 80;
 let lastSpeedIncrease = -10;
-let jumpPower = -0.5;
+let jumpPower = -2.5;
 
 // Erstelle die Spielfunktionen und Objekte
 const ui = new UI(canvas.width, canvas.height);
@@ -64,13 +64,8 @@ export function gameLoop(timestamp) {
         refresh = 40;
         player.jumpPower = -0.6;
         player.gravity = 0.3;
-        obstacles.obstaclespeed=80;
-        player.speed=speed*4;
-    } else if (getRefreshRate() === 60) {
-        refresh = 10;
-        player.jumpPower = -0.15;
-        player.gravity = 0.75;
-        obstacles.obstacleSpeed=20;
+        obstacles.obstaclespeed = 80;
+        player.speed = 72;
     }
     else if (getRefreshRate() === 144) {
         refresh = 24;
@@ -105,7 +100,7 @@ export function gameLoop(timestamp) {
                 obstacleSpeed += 50;
             }
             else{
-                obstacleSpeed += 12.5;
+                obstacleSpeed += 40;
             }
             lastSpeedIncrease = score;
             console.log("obstacleSpeed erhöht:" +obstacleSpeed)
@@ -225,7 +220,7 @@ function startNewGame() {
         obstacleSpeed = 100;
     }
     else if(getRefreshRate()===60){
-        obstacleSpeed = 20;
+        obstacleSpeed = 80;
     }
     else if(getRefreshRate()===144){
         obstacleSpeed = 48;

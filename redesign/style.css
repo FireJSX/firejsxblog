@@ -1,0 +1,114 @@
+body {
+    font-family: 'Wire One', sans-serif;
+}
+
+.frame {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-top: 15px;
+    margin-bottom: 0;
+}
+
+.footer {
+    background-color: black;
+    display: flex;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    padding: 0;
+    margin: 0;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    position: fixed;
+}
+
+.socials a {
+    color: rgba(255, 255, 255, 0.3);
+    font-size: 40px;
+    transition: color 0.3s ease, transform 0.2s ease;
+    text-decoration: none;
+}
+
+.socials a:hover {
+    color: white;
+    transform: scale(1.1);
+    text-decoration: none;
+}
+
+#copyright {
+    padding: 5px;
+    margin-bottom: 10px;
+    align-content: center;
+    color: #FFF;
+    text-align: center;
+    font-family: 'Wire One', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+/* Navigation Container */
+.nav-container {
+    position: relative; /* Nötig für die absolute Positionierung von .navitems */
+    width: 100%;
+}
+
+/* Rechte Navigation (Menü) */
+.navitems {
+    position: absolute;
+    top: 5%;
+    right: 5%;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    gap: 30px;
+    background: rgba(0, 0, 0, 0.50);
+    padding: 10px;
+}
+
+.navitems div {
+    display: flex;
+    flex-direction: row; /* Stapelt die Links vertikal */
+    gap: 15px; /* Abstand zwischen den Elementen */
+}
+
+.navitems a {
+    color: #FFF;
+    font-family: 'Wire One', sans-serif;
+    font-size: 32px;
+    text-decoration: none;
+}
+
+/* Linke Navigation (Home-Icon) */
+.navitems-left {
+    position: absolute;
+    top: 5%;
+    left: 5%;
+    background: rgba(0, 0, 0, 0.50);
+    padding: 10px;
+}
+
+.navitems-left a {
+    color: #FFF;
+    font-size: 32px;
+    text-decoration: none;
+}
+
+.video-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}

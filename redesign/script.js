@@ -26,8 +26,7 @@ function resetText() {
         currentTextIndex = 0;  // Wenn alle Texte durch sind, von vorne beginnen
     }
 
-    setTimeout(typeText, 500);  // 0.5 Sekunde warten und den nächsten Text tippen
+    setTimeout(typeText, 1000);
 }
 
-typeText();  // Startet den Tippvorgang
-
+typeText();

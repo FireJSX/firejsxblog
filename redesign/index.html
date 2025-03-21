@@ -25,7 +25,7 @@
   <meta name="theme-color" content="#ffffff">
 
   <link href="https://fonts.googleapis.com/css2?family=Wire+One&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://firejsx.de/redesign/style.css">
+  <link rel="stylesheet" href="style.css">
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"></script>
 
@@ -62,6 +62,40 @@
   </iframe>
 </div>
 
+
+<div id="text-container">
+  <span id="line1"></span>
+  <br> <!-- Zeilenumbruch -->
+  <span id="line2"></span>
+</div>
+
+
+<script src="script.js"></script>
+
+<div class="news-feed">
+  <h3 id="news-title">News</h3>
+  <div class="line"></div>
+  <p id="news-content">Loading News...</p>
+</div>
+
+<script>
+  const newsItems = [
+    { title: "News", content: "New Web-Design live now!" },
+    { title: "News", content: "Other pages coming soon!" },
+    { title: "News", content: "All new Development page incoming!" }
+  ];
+
+  let currentIndex = 0;
+
+  function updateNews() {
+    document.getElementById("news-title").innerText = newsItems[currentIndex].title;
+    document.getElementById("news-content").innerText = newsItems[currentIndex].content;
+    currentIndex = (currentIndex + 1) % newsItems.length;
+  }
+
+  setInterval(updateNews, 10000);
+  updateNews(); // Erste News sofort anzeigen
+</script>
 
 </body>
 

@@ -74,23 +74,41 @@
   <h3 id="news-title">News</h3>
   <div class="line"></div>
   <p id="news-content">Loading News...</p>
+  <button id="read-more-btn">Read More</button>
 </div>
 
 <script>
   const newsItems = [
-    { title: "News", content: "New Web-Design live now!" },
-    { title: "News", content: "Other pages coming soon!" },
-    { title: "News", content: "All new Development page incoming!" }
+    { title: "News", content: "New Web-Design live now!", color: "rgba(83,152,255,0.1)", link: "https://firejsx.de/redesign/index.html" },
+    { title: "News", content: "Other pages coming soon!", color: "rgba(255, 9, 20, 0.1)", link: "https://firejsx.de/redesign/index.html" },
+    { title: "News", content: "All new Development page incoming!", color: "rgba(152,255,83,0.1)", link: "https://firejsx.de/redesign/development.html" }
   ];
 
   let currentIndex = 0;
 
   function updateNews() {
-    document.getElementById("news-title").innerText = newsItems[currentIndex].title;
-    document.getElementById("news-content").innerText = newsItems[currentIndex].content;
+    const newsTitle = document.getElementById("news-title");
+    const newsContent = document.getElementById("news-content");
+    const newsFeed = document.querySelector(".news-feed");
+    const readMoreBtn = document.getElementById("read-more-btn");
+
+    // Aktuelle News setzen
+    newsTitle.innerText = newsItems[currentIndex].title;
+    newsContent.innerText = newsItems[currentIndex].content;
+
+    // Hintergrundfarbe ändern
+    newsFeed.style.background = newsItems[currentIndex].color;
+
+    // Button-Link aktualisieren
+    readMoreBtn.onclick = function () {
+      window.location.href = newsItems[currentIndex].link;
+    };
+
+    // Index für nächste News aktualisieren
     currentIndex = (currentIndex + 1) % newsItems.length;
   }
 
+  // News alle 10 Sekunden wechseln
   setInterval(updateNews, 10000);
   updateNews(); // Erste News sofort anzeigen
 </script>
